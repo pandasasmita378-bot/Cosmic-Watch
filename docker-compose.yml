@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # 1. Backend Service
+  backend:
+    build: ./backend
+    container_name: cosmic_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb+srv://rudranarayanmohapatra87878_db_user:D1Kp3oObTKUjF2cF@cosmicwatch.qevgpby.mongodb.net/?appName=cosmicwatch
+      - JWT_SECRET=my_cosmic_watch_hackathon_super_secret_key_2026_!@#
+      - NASA_API_KEY=RI3pBKEKEnXjtlscCUzTpqRH3480kWxIwFXpUN3T
+    depends_on:
+      - mongo_db
+    networks:
+      - cosmic_network
+
+  # 2. Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: cosmic_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - cosmic_network
+
+  # 3. Database Service (MongoDB)
+  mongo_db:
+    image: mongo:latest
+    container_name: cosmic_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - cosmic_network
+
+# Define a shared network so containers can talk to each other
+networks:
+  cosmic_network:
+    driver: bridge
+
+# Persist database data even if you stop containers
+volumes:
+  mongo_data:
