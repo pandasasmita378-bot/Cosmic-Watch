@@ -30,6 +30,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/asteroids', asteroidRoutes);
 app.use('/api/chat', chatRoutes); 
 
+app.get('/',(req,res)=>{
+  res.send('root is working');
+});
+
+
 io.on('connection', (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
