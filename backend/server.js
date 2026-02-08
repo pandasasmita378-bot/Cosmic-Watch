@@ -14,7 +14,7 @@ const chatRoutes = require('./routes/chatRoutes');
 const app = express();
 const server = http.createServer(app); 
 
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ;
 
 const io = new Server(server, {
   cors: {
@@ -64,5 +64,5 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB Connected Successfully'))
   .catch(err => console.error('MongoDB Connection Error:', err));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
