@@ -31,7 +31,7 @@ function App() {
         <div className="min-h-screen text-white selection:bg-blue-500 selection:text-white relative z-10">
           <Navbar />
           <hr />
-          <Routes>
+          <Routes basename="/Cosmic-Watch">
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
